@@ -1,8 +1,8 @@
 from flask import *
 
 # Usuário e senha "fake" só pra exemplo
-USER = "admin123"
-PASSWORD = "1234"
+USER = "admin"
+PASSWORD = "123"
 
 def login_funcao():
     if request.method == 'POST':

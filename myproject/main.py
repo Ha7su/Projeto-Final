@@ -3,7 +3,6 @@ from login import login_funcao
 
 app = Flask(__name__)
 
-
 @app.route("/")
 def index():
     return redirect(url_for('login'))
