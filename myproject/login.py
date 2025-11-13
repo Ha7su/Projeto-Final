@@ -1,7 +1,7 @@
 from flask import *
 
 # Usuário e senha "fake" só pra exemplo
-USER = "admin"
+USER = "admin123"
 PASSWORD = "1234"
 
 def login_funcao():
