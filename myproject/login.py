@@ -1,29 +1,32 @@
 import sqlite3
+import secrets
 from flask import *
 
-# Usuário e senha "fake" só pra exemplo
-USER = "admin"
-PASSWORD = "123"
 
-def validar_login(usuario, senha):
+def validar_login(nome, senha):
     conn = sqlite3.connect('banco.db')
     cursor = conn.cursor()
 
-    cursor.execute("SELECT * FROM usuarios WHERE nome = ? AND senha = ?", (usuario, senha))
+    cursor.execute("SELECT * FROM usuarios WHERE nome = ? AND senha = ?", (nome, senha))
     resultado = cursor.fetchone()
 
     conn.close()
-    return resultado  # Retorna None se não encontrar
+    return resultado
 
 def login_funcao():
     if request.method == 'POST':
-        usuario = request.form['nome']
+        nome = request.form['nome']
         senha = request.form['senha']
 
-        if validar_login(usuario, senha):
+        if validar_login(nome, senha):
+            
+            token = secrets.token_hex(16)
+            session['token'] = token
+            session['usuario'] = nome
+
             return redirect(url_for('home'))
         else:
             return render_template('login.html', erro="Usuário ou senha incorretos!")
 
-    # Se for GET, só mostra o formulário
+   
     return render_template('login.html')  

@@ -1,7 +1,8 @@
 from flask import *
-from login import login_funcao
+from login import *
 
 app = Flask(__name__)
+app.secret_key = "90d4f7b25a6c997c"
 
 @app.route("/")
 def index():
@@ -11,18 +12,31 @@ def index():
 def login():
     return login_funcao()
 
-
 @app.route("/home")
 def home():
-    return render_template('home.html')
+    if 'token' not in session:
+        return redirect(url_for('login'))
+
+    return render_template("home.html", usuario=session['usuario'])
 
 @app.route("/recursos")
 def recursos():
-    return "<p>Pagina de recursos</p>"
+    if 'token' not in session:
+        return redirect(url_for('login'))
+
+    return '<p>Pagina de recursos</p>'
 
 @app.route("/funcionarios")
 def funcionarios():
-    return "<p>Pagina de funcionarios</p>"
+    if 'token' not in session:
+        return redirect(url_for('login'))
+
+    return '<p>Pagina de funcionaros</p>'
+
+@app.route("/logout")
+def logout():
+    session.clear()
+    return redirect(url_for('login'))
 
 if __name__ == '__main__':
     app.run(debug=True)
