@@ -9,7 +9,7 @@ def index():
 
 @app.route("/login", methods=['GET', 'POST'])
 def login():
-    login_funcao()
+    return login_funcao()
 
 
 @app.route("/home")
@@ -23,3 +23,6 @@ def recursos():
 @app.route("/funcionarios")
 def funcionarios():
     return "<p>Pagina de funcionarios</p>"
+
+if __name__ == '__main__':
+    app.run(debug=True)
