@@ -1,5 +1,8 @@
 import sqlite3
 import secrets
+import hashlib
+from banco import get_hash
+
 from flask import *
 
 
@@ -7,7 +10,7 @@ def validar_login(nome, senha):
     conn = sqlite3.connect('banco.db')
     cursor = conn.cursor()
 
-    cursor.execute("SELECT * FROM usuarios WHERE nome = ? AND senha = ?", (nome, senha))
+    cursor.execute("SELECT * FROM usuarios WHERE nome = ? AND senha = ?", (nome, get_hash(senha)))
     resultado = cursor.fetchone()
 
     conn.close()

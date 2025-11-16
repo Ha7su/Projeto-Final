@@ -1,9 +1,15 @@
 import sqlite3
+import hashlib
+
+
 
 conexao = sqlite3.connect('banco.db')
 cursor = conexao.cursor()
 
-
+def get_hash(senha):
+    enconded_text = senha.encode('utf-8')
+    hash_object = hashlib.sha256(enconded_text)
+    return hash_object.hexdigest()
 
 def adicionar_usuario():
     nome = input('Digite um nome:')
@@ -13,7 +19,7 @@ def adicionar_usuario():
 
     cursor.execute(
         "INSERT INTO usuarios (nome, senha, tipo) VALUES (?,?,?)",
-        (nome, senha, tipo)
+        (nome, get_hash(senha), tipo)
 )
     conexao.commit()
 
@@ -49,7 +55,7 @@ def modificar_usuario():
                 tipo = 'Administrador' if tipo_numero == '1' else 'Gerente' if tipo_numero == '2' else 'Funcionario' if tipo_numero == '3' else 'Error'
                 cursor.execute("""UPDATE usuarios
                                   SET nome = ?, senha = ?, tipo = ?
-                                  WHERE id = ?;""", (nome, senha, tipo, id_update))
+                                  WHERE id = ?;""", (nome, get_hash(senha), tipo, id_update))
                 conexao.commit()
                 print('Usuario modificado com sucesso!')
 
@@ -113,6 +119,24 @@ def mostrar_inventario():
     for linha in cursor.fetchall():
         print(linha)
 
+# Funcao usada para converter todas as senhas em hash:
+# def modificar_senha():
+#     senhas = cursor.execute('SELECT senha FROM usuarios')
+#     hash_senhas = []
+#     for i in senhas:
+#         hash_senhas.append(get_hash(i[0]))
+    
+#     print(hash_senhas)
+    
+#     cursor.executemany(
+#     "UPDATE usuarios SET senha = ? WHERE id = ?",
+#     [(senha, i+1) for i, senha in enumerate(hash_senhas)]
+# )
+    
+#     conexao.commit()
+
+# modificar_senha()
+
 # cursor.execute("""
 # CREATE TABLE IF NOT EXISTS usuarios (
 #   id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -127,13 +151,14 @@ def mostrar_inventario():
 # INSERT INTO usuarios (nome, senha, tipo)
 # VALUES (?, ?, ?)
 # """, [
-#     ('Ana Silva', 'senha123', 'Administrador'),
+#     ('admin', '123', 'Administrador'),
+#     ('Ana Silva', 'senha123', 'Gerente'),
 #     ('Bruno Costa', 'abc123', 'Gerente'),
 #     ('Carla Nunes', 'carla2025', 'Funcionario'),
 #     ('Daniel Rocha', 'dan123', 'Funcionario'),
 #     ('Eduardo Lima', 'edu987', 'Gerente'),
 #     ('Fernanda Alves', 'f3rna', 'Funcionario'),
-#     ('Gustavo Moreira', 'gust@123', 'Administrador'),
+#     ('Gustavo Moreira', 'gust@123', 'Funcionario'),
 #     ('Helena Dias', 'helena#1', 'Funcionario'),
 #     ('Igor Martins', 'igorm', 'Funcionario'),
 #     ('Juliana Souza', 'juliana321', 'Gerente'),
@@ -145,8 +170,7 @@ def mostrar_inventario():
 #     ('Patrícia Ramos', 'pat123', 'Funcionario'),
 #     ('Rafael Oliveira', 'rafa123', 'Funcionario'),
 #     ('Simone Pereira', 's1mon3', 'Gerente'),
-#     ('Thiago Mendes', 'thiago', 'Funcionario'),
-#     ('Vanessa Torres', 'vanessa!', 'Funcionario')
+#     ('Thiago Mendes', 'thiago', 'Funcionario')
 # ])
 # conexao.commit()
 
