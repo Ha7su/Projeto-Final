@@ -21,15 +21,20 @@ def login_funcao():
         nome = request.form['nome']
         senha = request.form['senha']
 
-        if validar_login(nome, senha):
+        resultado = validar_login(nome, senha)
+        if resultado:
             
             token = secrets.token_hex(16)
             session['token'] = token
             session['usuario'] = nome
-
+            session["permissao"] = resultado[3]
+            
             return redirect(url_for('home'))
         else:
             return render_template('login.html', erro="Usuário ou senha incorretos!")
 
    
     return render_template('login.html')  
+
+def permissao_check():
+    return session.get("permissao") in ["Administrador", "Gerente"]

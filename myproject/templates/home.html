@@ -2,10 +2,22 @@
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <title>Home Teste</title>
+    <title>Home</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='home.css') }}">
 </head>
 <body>
+
+{% if session.get('usuario') %}
+    <div class="logout-container">
+        <a href="/logout" class="logout-button">Logout</a>
+    </div>
+{% endif %}
+
     <h1>Bem-vindo!</h1>
     <p>Você fez login com sucesso.</p>
+
+    <button class= 'recursos' onclick="window.location.href='/recursos'">
+    Ir para Recursos
+</button>
 </body>
 </html>

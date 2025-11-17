@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Inventário</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='recursos.css') }}">
+</head>
+<body>
+
+{% if session.get('usuario') %}
+    <div class="logout-container">
+        <a href="/logout" class="logout-button">Logout</a>
+    </div>
+{% endif %}
+
+<h1>Inventário</h1>
+
+<table>
+    <thead>
+        <tr>
+            <th>Categoria</th>
+            <th>Nome</th>
+            <th>Quantidade</th>
+            <th>Ações</th>
+        </tr>
+    </thead>
+    <tbody>
+
+        {% for item in inventario %}
+        <tr>
+            <td>{{ item[1] }}</td>
+            <td>{{ item[2] }}</td>
+            <td>{{ item[3] }}</td>
+
+            <td>
+                {% if permissao %}
+                <!-- Botão +1 -->
+                <a href="/add/{{ item[0] }}">
+                    <button>+1</button>
+                </a>
+
+                <!-- Botão -1 -->
+                <a href="/remove/{{ item[0] }}">
+                    <button class="minus">-1</button>
+                </a>
+
+                <!-- Input para definir quantidade -->
+                <form action="/set/{{ item[0] }}" method="POST" class="form-set-quantidade">
+                    <input type="number" name="quantidade" min="0" required class="input-quantidade">
+                    <button type="submit" class="btn-atualizar">Atualizar</button>
+                </form>
+
+                <a href="/delete/{{ item[0] }}" class="btn-remover-link">
+                    <button class="btn-remover">Remover item</button>
+                </a>
+                {% endif %}
+
+            </td>
+        </tr>
+        {% endfor %}
+
+    </tbody>
+</table>
+
+</body>
+</html>
