@@ -116,6 +116,16 @@ def usuarios_add_post():
     
     return usuarios_add_funcao()
 
+@app.route("/usuarios/delete/<int:usuario_id>")
+def delete_usuario(usuario_id):
+    if 'token' not in session:
+        return redirect(url_for('login'))
+    if not usuario_autorizado():
+        return "Acesso negado: você não tem permissão para remover usuarios.", 403
+
+    
+    return delete_usuario_funcao(usuario_id)
+
 
 
 @app.route("/about")

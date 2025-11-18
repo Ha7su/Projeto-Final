@@ -6,6 +6,11 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='login.css') }}">
 </head>
 <body>
+
+    <div class="about-container">
+        <a href="/about" class="about-button">About</a>
+    </div>
+
     <form method="POST">
         <h2>Login</h2>
         {% if erro %}

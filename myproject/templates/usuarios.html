@@ -29,12 +29,19 @@
     <tbody>
          <a href="/usuarios/add" class="btn-add-item">Adicionar novo usuário</a>
          
-        {% for item in usuarios %}
+        {%for usuario in usuarios%}
         <tr>
-            <td>{{ item[0] }}</td>
-            <td>{{ item[1] }}</td>
-            <td>{{ item[2] }}</td>
-            <td>{{ item[3] }}</td>
+            <td>{{ usuario[0] }}</td>
+            <td>{{ usuario[1] }}</td>
+            <td>{{ usuario[2] }}</td>
+            <td>{{ usuario[3] }}</td>
+            <td>
+                {% if usuario[3] != "Administrador" %}
+                <a href="/usuarios/delete/{{ usuario[0] }}" class="btn-remover-link">
+                    <button class="btn-remover">Remover usuario</button>
+                </a>
+                {% endif %}
+            </td>
         </tr>
         {% endfor %}
 
