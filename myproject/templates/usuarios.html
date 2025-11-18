@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Usuários</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='usuarios.css') }}">
+</head>
+<body>
+
+{% if session.get('usuario') %}
+    <div class="logout-container">
+        <a href="/logout" class="logout-button">Logout</a>
+    </div>
+    <a href="{{ url_for('home') }}" class="btn-voltar-home">Voltar</a>
+{% endif %}
+
+<h1>Usuários</h1>
+
+<table>
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Nome</th>
+            <th>User hash</th>
+            <th>Cargo</th>
+            <th>Ações</th>
+        </tr>
+    </thead>
+    <tbody>
+         <a href="/usuarios/add" class="btn-add-item">Adicionar novo usuário</a>
+         
+        {% for item in usuarios %}
+        <tr>
+            <td>{{ item[0] }}</td>
+            <td>{{ item[1] }}</td>
+            <td>{{ item[2] }}</td>
+            <td>{{ item[3] }}</td>
+        </tr>
+        {% endfor %}
+
+    </tbody>
+</table>
+
+</body>
+</html>

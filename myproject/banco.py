@@ -210,6 +210,3 @@ def mostrar_inventario():
 #     ('Dispositivo de Segurança', 'Sistema de Acesso com Cartão', 12)
 # ])
 # conexao.commit()
-
-
-mostrar_usuarios()

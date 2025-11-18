@@ -2,16 +2,26 @@ from flask import *
 import sqlite3
 from login import permissao_check
 
-app = Flask(__name__)
-
-
 
 def get_inventario():
     conn = sqlite3.connect("banco.db")
     cursor = conn.cursor()
-    cursor.execute("SELECT id, categoria, nome, quantidade FROM inventario")
+    # cursor.execute("SELECT id, categoria, nome, quantidade FROM inventario")
+    cursor.execute("""
+        SELECT * FROM inventario
+        ORDER BY 
+            CASE categoria
+                WHEN 'Equipamento' THEN 1
+                WHEN 'Veículo' THEN 2
+                WHEN 'Dispositivo de Segurança' THEN 3
+                ELSE 4
+            END,
+            nome ASC
+    """)
     dados = cursor.fetchall()
     conn.close()
+
+
     return dados
 
 def recursos_funcao():
@@ -54,27 +64,3 @@ def delete_funcao(item_id):
     conn.commit()
     conn.close()
     return redirect(url_for("recursos"))
-
-# @app.route("/add/<int:item_id>")
-# def add(item_id):
-#     conn = sqlite3.connect("banco.db")
-#     cursor = conn.cursor()
-#     cursor.execute("UPDATE inventario SET quantidade = quantidade + 1 WHERE id = ?", (item_id,))
-#     conn.commit()
-#     conn.close()
-#     return redirect(url_for("recursos"))
-
-# @app.route("/remove/<int:item_id>")
-# def remove(item_id):
-#     conn = sqlite3.connect("banco.db")
-#     cursor = conn.cursor()
-#     cursor.execute("UPDATE inventario SET quantidade = quantidade - 1 WHERE id = ? AND quantidade > 0", (item_id,))
-#     conn.commit()
-#     conn.close()
-#     return redirect(url_for("recursos"))
-
-# @app.route("/set/<int:item_id>", methods=["POST"])
-# def set_quantidade(item_id):
-#     nova_qtd = int(request.form["quantidade"])
-#     update_quantidade(item_id, nova_qtd)
-#     return redirect(url_for("recursos"))

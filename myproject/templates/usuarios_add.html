@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Adicionar novo usuários</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='usuarios_add.css') }}">
+</head>
+<body>
+
+<div class="container">
+    <h2>Adicionar novo usuários</h2>
+
+    <form action="/usuarios/add" method="POST">
+
+        <label for="nome">Nome do usuário:</label>
+        <input type="text" id="nome" name="nome" required>
+
+        <label for="senha">Senha:</label>
+        <input type="text" id="senha" name="senha" required>
+
+        <label for="categoria">Cargo:</label>
+        <select id="categoria" name="cargo" required>
+            <option value="">Selecione...</option>
+            <option value="Administrador">Administrador</option>
+            <option value="Gerente">Gerente</option>
+            <option value="Funcionario">Funcionario</option>
+        </select>
+
+        <button type="submit">Adicionar usuários</button>
+
+        <a href="/usuarios" class="btn-cancelar">Cancelar</a>
+    </form>
+
+</body>
+</html>

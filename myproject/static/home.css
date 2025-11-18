@@ -8,6 +8,16 @@
     margin-bottom: 20px;
     }
 
+.usuarios {
+    padding: 10px 20px; 
+    background: #4CAF50; 
+    color: white; 
+    border: none; 
+    border-radius: 5px; 
+    cursor: pointer;
+    margin-bottom: 20px;
+    }
+
 .logout-container {
     position: fixed;
     top: 10px;
