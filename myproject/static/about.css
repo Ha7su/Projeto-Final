@@ -1,0 +1,139 @@
+/* ======= RESET BÁSICO ======= */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+/* ======= FUNDO ======= */
+body {
+    background-color: #000000;
+    color: #e6e6e6;
+    display: flex;
+    justify-content: center;
+    padding-top: 40px;
+}
+
+/* ======= LOGOUT BUTTON (MESMO DOS OUTROS) ======= */
+.logout-container {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+}
+
+.logout-button {
+    background-color: #ff4d4d;
+    padding: 8px 18px;
+    border-radius: 6px;
+    font-size: 14px;
+    color: white;
+    text-decoration: none;
+    transition: 0.3s;
+}
+
+.logout-button:hover {
+    background-color: #cc0000;
+}
+
+/* ======= CONTAINER PRINCIPAL ======= */
+.container {
+    width: 850px;
+    background-color: #000000;
+    padding: 35px;
+    border-radius: 14px;
+    box-shadow: 0 0 18px rgba(0, 170, 255, 0.25);
+    text-align: center;
+}
+
+/* ======= LOGO ======= */
+.logo {
+    width: 180px;
+    margin-bottom: 20px;
+}
+
+/* ======= CABEÇALHO ======= */
+h1 {
+    font-size: 32px;
+    margin-bottom: 8px;
+    color: #00aaff;
+}
+
+.subtext {
+    font-size: 16px;
+    margin-bottom: 30px;
+    opacity: 0.8;
+}
+
+/* ======= CAIXA DE CONTEÚDO ======= */
+.about-box {
+    text-align: left;
+    background-color: #141414;
+    padding: 25px;
+    border-radius: 12px;
+    border: 1px solid #003344;
+    box-shadow: inset 0 0 10px rgba(0, 170, 255, 0.15);
+}
+
+/* TÍTULOS DENTRO DO BOX */
+.about-box h2 {
+    color: #00aaff;
+    margin-top: 25px;
+    margin-bottom: 10px;
+}
+
+.about-box h3 {
+    color: #00ccff;
+    margin-top: 18px;
+    margin-bottom: 6px;
+}
+
+/* LISTAS */
+ul {
+    margin-left: 20px;
+    margin-bottom: 10px;
+}
+
+ul li {
+    margin-bottom: 6px;
+    line-height: 1.4;
+}
+
+/* TEXTO */
+.about-box p {
+    margin-bottom: 15px;
+    line-height: 1.6;
+}
+
+/* ======= BOTÃO VOLTAR ======= */
+.back-button {
+    display: inline-block;
+    background-color: #0088cc;
+    color: white;
+    padding: 12px 22px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-size: 16px;
+    margin-top: 30px;
+    transition: 0.3s;
+}
+
+.back-button:hover {
+    background-color: #006699;
+}
+
+.author-box {
+    margin-top: 25px;
+    padding: 18px;
+    border-radius: 10px;
+    border: 1px solid #0077aa;
+    background-color: #111;
+    text-align: center;
+    font-size: 18px;
+    box-shadow: 0 0 12px rgba(0, 170, 255, 0.25);
+}
+
+.author-box p:first-child {
+    font-size: 20px;
+    color: #00aaff;
+}

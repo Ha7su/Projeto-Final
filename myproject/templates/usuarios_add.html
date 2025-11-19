@@ -2,13 +2,20 @@
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <title>Adicionar novo usuários</title>
+    <title>Adicionar novo usuário</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='usuarios_add.css') }}">
 </head>
 <body>
 
+{% if session.get('usuario') %}
+    <div class="logout-container">
+        <a href="/logout" class="logout-button">Logout</a>
+    </div>
+    <a href="{{ url_for('usuarios') }}" class="btn-voltar-home">Voltar</a>
+{% endif %}
+
 <div class="container">
-    <h2>Adicionar novo usuários</h2>
+    <h2>Adicionar novo usuário</h2>
 
     <form action="/usuarios/add" method="POST">
 
@@ -26,10 +33,11 @@
             <option value="Funcionario">Funcionario</option>
         </select>
 
-        <button type="submit">Adicionar usuários</button>
+        <button type="submit" class="btn-salvar">Adicionar usuário</button>
 
         <a href="/usuarios" class="btn-cancelar">Cancelar</a>
     </form>
+</div>
 
 </body>
 </html>

@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
@@ -47,6 +47,71 @@
 
     </tbody>
 </table>
+
+</body>
+</html> -->
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Usuários - Wayne Industries</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='usuarios.css') }}">
+</head>
+<body>
+
+{% if session.get('usuario') %}
+    <div class="logout-container">
+        <a href="/logout" class="logout-button">Logout</a>
+    </div>
+
+    <a href="{{ url_for('home') }}" class="btn-voltar-home">Voltar</a>
+{% endif %}
+
+<div class="container">
+
+    <img src="{{ url_for('static', filename='imagens/wayne_logo.png') }}"
+         alt="Wayne Industries" class="logo">
+
+    <h1>Gerenciamento de Usuários</h1>
+
+    <a href="/usuarios/add" class="btn-add-item">Adicionar novo usuário</a>
+
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nome</th>
+                <th>User Hash</th>
+                <th>Cargo</th>
+                <th>Ações</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            {% for usuario in usuarios %}
+            <tr>
+                <td>{{ usuario[0] }}</td>
+                <td>{{ usuario[1] }}</td>
+                <td>{{ usuario[2] }}</td>
+                <td>{{ usuario[3] }}</td>
+
+                <td>
+                    {% if usuario[3] != "Administrador" %}
+                        <a href="/usuarios/delete/{{ usuario[0] }}">
+                            <button class="btn-remover">Remover</button>
+                        </a>
+                    {% else %}
+                        <span class="no-action">—</span>
+                    {% endif %}
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+
+    </table>
+
+</div>
 
 </body>
 </html>

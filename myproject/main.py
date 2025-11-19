@@ -131,7 +131,7 @@ def delete_usuario(usuario_id):
 @app.route("/about")
 def about():
 
-    return '<p>Pagina de about</p>'
+    return render_template('about.html')
 
 @app.route("/logout")
 def logout():

@@ -2,27 +2,38 @@
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <title>Home</title>
+    <title>Home - Wayne Industries</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='home.css') }}">
 </head>
 <body>
 
-{% if session.get('usuario') %}
-    <div class="logout-container">
-        <a href="/logout" class="logout-button">Logout</a>
+    {% if session.get('usuario') %}
+        <div class="logout-container">
+            <a href="/logout" class="logout-button">Logout</a>
+        </div>
+    {% endif %}
+
+    <div class="container">
+
+        <img src="{{ url_for('static', filename='imagens/Wayneindustries.png') }}" 
+             alt="Wayne Industries"
+             class="logo">
+
+        <h1>Bem-vindo a Wayne Industries</h1>
+        <p class="subtext">Wayne Enterprises, the future of Gotham.</p>
+
+        <div class="button-box">
+            <button class="menu-button" onclick="window.location.href='/recursos'">
+                Recursos
+            </button>
+        {% if session.get('permissao') == "Administrador" %}
+            <button class="menu-button" onclick="window.location.href='/usuarios'">
+                Usuários
+            </button>
+        {% endif %}
+        </div>
+
     </div>
-{% endif %}
 
-    <h1>Bem-vindo!</h1>
-    <p>Você fez login com sucesso.</p>
-
-    <button class= 'recursos' onclick="window.location.href='/recursos'">
-        Ir para Recursos
-    </button>
-
-    <button class= 'usuarios' onclick="window.location.href='/usuarios'">
-        Ir para Usuários
-    </button>
-    
 </body>
 </html>

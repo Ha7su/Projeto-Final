@@ -2,7 +2,7 @@
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
-    <title>Inventário</title>
+    <title>Inventário - Wayne Industries</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='recursos.css') }}">
 </head>
 <body>
@@ -11,59 +11,67 @@
     <div class="logout-container">
         <a href="/logout" class="logout-button">Logout</a>
     </div>
+
     <a href="{{ url_for('home') }}" class="btn-voltar-home">Voltar</a>
 {% endif %}
 
-<h1>Inventário</h1>
+<div class="container">
 
-<table>
-    <thead>
-        <tr>
-            <th>Categoria</th>
-            <th>Nome</th>
-            <th>Quantidade</th>
-            {% if permissao %}<th>Ações</th>{% endif %}
-        </tr>
-    </thead>
-    <tbody>
-        {% if permissao %} <a href="/recursos/add" class="btn-add-item">Adicionar novo recurso</a> {% endif %}
-         
-        {% for item in inventario %}
-        <tr>
-            <td>{{ item[1] }}</td>
-            <td>{{ item[2] }}</td>
-            <td>{{ item[3] }}</td>
-            {% if permissao %}
-            <td>
-                
-                <!-- Botão +1 -->
-                <a href="/add/{{ item[0] }}">
-                    <button>+1</button>
-                </a>
+    <img src="{{ url_for('static', filename='imagens/wayne_logo.png') }}" 
+         alt="Wayne Industries" class="logo">
 
-                <!-- Botão -1 -->
-                <a href="/remove/{{ item[0] }}">
-                    <button class="minus">-1</button>
-                </a>
+    <h1>Inventário Wayne Industries</h1>
 
-                <!-- Input para definir quantidade -->
-                <form action="/set/{{ item[0] }}" method="POST" class="form-set-quantidade">
-                    <input type="number" name="quantidade" min="0" required class="input-quantidade">
-                    <button type="submit" class="btn-atualizar">Atualizar</button>
-                </form>
+    {% if permissao %}
+        <a href="/recursos/add" class="btn-add-item">Adicionar novo recurso</a>
+    {% endif %}
 
-                <a href="/delete/{{ item[0] }}" class="btn-remover-link">
-                    <button class="btn-remover">Remover item</button>
-                </a>
-                
+    <table>
+        <thead>
+            <tr>
+                <th>Categoria</th>
+                <th>Nome</th>
+                <th>Quantidade</th>
+                {% if permissao %}<th>Ações</th>{% endif %}
+            </tr>
+        </thead>
 
-            </td>
-            {% endif %}
-        </tr>
-        {% endfor %}
+        <tbody>
+            {% for item in inventario %}
+            <tr>
+                <td>{{ item[1] }}</td>
+                <td>{{ item[2] }}</td>
+                <td>{{ item[3] }}</td>
 
-    </tbody>
-</table>
+                {% if permissao %}
+                <td class="acoes">
+
+                    <a href="/add/{{ item[0] }}">
+                        <button class="btn-acao add">+1</button>
+                    </a>
+
+                    <a href="/remove/{{ item[0] }}">
+                        <button class="btn-acao remove">-1</button>
+                    </a>
+
+                    <form action="/set/{{ item[0] }}" method="POST" class="form-set-quantidade">
+                        <input type="number" name="quantidade" min="0" required class="input-quantidade">
+                        <button type="submit" class="btn-acao atualizar">Atualizar</button>
+                    </form>
+
+                    <a href="/delete/{{ item[0] }}">
+                        <button class="btn-acao delete">Remover</button>
+                    </a>
+
+                </td>
+                {% endif %}
+            </tr>
+            {% endfor %}
+        </tbody>
+
+    </table>
+
+</div>
 
 </body>
 </html>

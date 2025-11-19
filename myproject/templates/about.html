@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Sobre o Sistema - Wayne Industries</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='about.css') }}">
+</head>
+<body>
+
+    {% if session.get('usuario') %}
+        <div class="logout-container">
+            <a href="/logout" class="logout-button">Logout</a>
+        </div>
+    {% endif %}
+
+    <div class="container">
+
+        <img src="{{ url_for('static', filename='imagens/Wayneindustries.png') }}" 
+             alt="Wayne Industries"
+             class="logo">
+
+        <h1>Sobre o Sistema</h1>
+        <p class="subtext">Wayne Enterprises — Inventory & User Management System</p>
+
+        <div class="about-box">
+
+            <h2>📌 Visão Geral</h2>
+            <p>
+                Este sistema foi desenvolvido para gerenciar o inventário da Wayne Industries e 
+                controlar o acesso de usuários segundo níveis de permissão. Ele integra múltiplos 
+                recursos de backend e frontend em uma aplicação robusta construída com 
+                <strong>Python, Flask, SQLite, HTML, CSS e Jinja2</strong>.
+            </p>
+
+            <h2>🛠 Tecnologias e Conceitos Utilizados</h2>
+
+            <h3>🔹 Backend — Python & Flask</h3>
+            <ul>
+                <li>Criação de rotas usando <code>@app.route</code> com métodos GET e POST</li>
+                <li>Validação de formulários no servidor</li>
+                <li>Sessões Flask para autenticação persistente</li>
+                <li>Proteção de rotas com validação de token por cargo (Administrador, Gerente, Funcionário)</li>
+                <li>Gerenciamento completo do inventário:
+                    <ul>
+                        <li>CRUD (Create, Read, Update, Delete)</li>
+                        <li>Organização por categorias</li>
+                        <li>Controle de quantidade</li>
+                    </ul>
+                </li>
+                <li>Gerenciamento de usuários com:
+                    <ul>
+                        <li>Cadastro dinâmico</li>
+                        <li>Criptografia de senha (hash)</li>
+                        <li>Bloqueio de funções para quem não é Administrador</li>
+                    </ul>
+                </li>
+            </ul>
+
+            <h3>🔹 Banco de Dados — SQLite</h3>
+            <ul>
+                <li>Modelagem de tabelas para usuários e inventário</li>
+                <li>Uso de <code>cursor.execute</code> e <code>cursor.executemany</code></li>
+                <li>Consultas parametrizadas para evitar SQL Injection</li>
+                <li>Atualizações e remoções baseadas em ID</li>
+                <li>Controle de integridade com validação de dados</li>
+            </ul>
+
+            <h3>🔹 Frontend — HTML, CSS e Jinja2</h3>
+            <ul>
+                <li>Templates reutilizáveis usando Jinja2</li>
+                <li>Renderização condicional:
+                    <br>ex.: botões sendo exibidos apenas para Administradores
+                </li>
+                <li>Temas responsivos com CSS personalizado</li>
+                <li>Formulários completos de criação/edição de dados</li>
+                <li>Layouts consistentes entre todas as páginas</li>
+            </ul>
+
+            <h3>🔹 Segurança</h3>
+            <ul>
+                <li>Token de sessão para impedir acesso direto via URL</li>
+                <li>Hash de senha com SHA-256</li>
+                <li>Restrição visual e lógica de funções administrativas</li>
+                <li>Tratamento de erros e proteção contra requisições inválidas</li>
+            </ul>
+
+            <h3>🔹 Arquitetura e Organização</h3>
+            <ul>
+                <li>Separação entre:
+                    <ul>
+                        <li>templates HTML</li>
+                        <li>estilos (static/css)</li>
+                        <li>imagens (static/imagens)</li>
+                        <li>aplicação Flask</li>
+                    </ul>
+                </li>
+                <li>
+                    Estrutura clara e escalável, permitindo adicionar novos módulos (ex.: relatórios, logs, dashboards)
+                </li>
+                <li>
+                    Código modular, facilitando manutenção e extensões futuras
+                </li>
+            </ul>
+
+            <h2>🎯 Objetivo do Projeto</h2>
+            <p>
+                Além de simular um sistema corporativo real, este projeto demonstra domínio prático 
+                do desenvolvimento web completo — do backend ao frontend — sendo ideal como peça de 
+                portfólio para vagas de <strong>Desenvolvedor Full Stack ou Backend</strong>.
+            </p>
+
+            <h2>💼 Desenvolvido Por</h2>
+
+        <div class="author-box">
+            <p><b>Guilherme Lundgren</b></p>
+            <p>Desenvolvedor Full Stack & Criador do Sistema</p>
+            
+        </div>
+
+
+        </div>
+
+
+        <a href="/" class="back-button">Voltar</a>
+
+    </div>
+
+</body>
+</html>
